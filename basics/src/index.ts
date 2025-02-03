@@ -5,6 +5,18 @@ type Menu = {
    price: number
 }
 
+type Order = {
+   id: number
+   pizza: string
+   status: string
+}
+
+type OrderQue = {
+   id: number,
+   pizza: object,
+   status: string
+}
+
 const menu = [
     {name: "lorem one", price: 9},
     {name: "lorem two", price: 7},
@@ -14,7 +26,7 @@ const menu = [
 
 let cashInRegister = 100;
 let nextOrderId = 1;
-const orderQue = []
+const orderQue: OrderQue[] = []
 
 
 function addNewPizza(pizzaobj: Menu){
@@ -37,6 +49,10 @@ function placePizzaOrder(pizzaname: string) {
 
 function completeOrder(orderId: number) {
  const order = orderQue.find((order) => order.id === orderId)
+ if(!order){
+   return;
+ }
+ order.status = "completed"
  return order;
 }
 
