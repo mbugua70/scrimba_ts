@@ -1,6 +1,7 @@
 // custom project type
 
 type Menu = {
+   id: number
    name: string
    price: number
 }
@@ -8,20 +9,20 @@ type Menu = {
 type Order = {
    id: number
    pizza: string
-   status: string
+   status: "ordered" | "completed"
 }
 
 type OrderQue = {
    id: number,
    pizza: object,
-   status: string
+   status:  "ordered" | "completed"
 }
 
-const menu = [
-    {name: "lorem one", price: 9},
-    {name: "lorem two", price: 7},
-    {name: "lorem three", price: 10},
-    {name: "lorem four", price: 23}
+const menu: Menu[] = [
+    {id: 1, name: "lorem one", price: 9},
+    {id: 2, name: "lorem two", price: 7},
+    {id: 3, name: "lorem three", price: 10},
+    {id: 4, name: "lorem four", price: 23}
 ]
 
 let cashInRegister = 100;
@@ -42,7 +43,7 @@ function placePizzaOrder(pizzaname: string) {
     return;
    }
    cashInRegister += selectedPizza.price;
-   const newOrder = {id: nextOrderId++,pizza: selectedPizza, status: "ordered" }
+   const newOrder: OrderQue = {id: nextOrderId++,pizza: selectedPizza, status: "completed" }
    orderQue.push(newOrder)
    return newOrder
 }
@@ -56,10 +57,10 @@ function completeOrder(orderId: number) {
  return order;
 }
 
-addNewPizza({name: "lorem five", price: 200})
-addNewPizza({name: "lorem six", price: 20})
-addNewPizza({name: "lorem seven", price: 100})
-addNewPizza({name: "lorem eight", price: 30})
+addNewPizza({id: 1,name: "lorem five", price: 200})
+addNewPizza({id: 2,name: "lorem six", price: 20})
+addNewPizza({id: 3,name: "lorem seven", price: 100})
+addNewPizza({id: 4,name: "lorem eight", price: 30})
 
 
 placePizzaOrder("lorem four")
