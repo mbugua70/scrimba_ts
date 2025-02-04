@@ -18,6 +18,8 @@ type OrderQue = {
    status:  "ordered" | "completed"
 }
 
+type Identifier = string | number
+
 const menu: Menu[] = [
     {id: 1, name: "lorem one", price: 9},
     {id: 2, name: "lorem two", price: 7},
@@ -55,6 +57,15 @@ function completeOrder(orderId: number) {
  }
  order.status = "completed"
  return order;
+}
+
+function getPizzaDetails(identifier: Identifier){
+   if(typeof identifier === "string"){
+      const result = menu.find(order => order.name.toLocaleLowerCase() === identifier.toLocaleLowerCase())
+      return result;
+   }
+   const result = menu.find(order => order.id === identifier)
+   return result;
 }
 
 addNewPizza({id: 1,name: "lorem five", price: 200})
